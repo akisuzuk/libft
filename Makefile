@@ -5,6 +5,7 @@
 CC     := gcc  # ":="は単純展開マクロ、"="は再起展開マクロ
 
 
+
 # コンパイルオプションの指定
 CFLAGS := -Wall -Wextra -Werror
 
