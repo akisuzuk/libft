@@ -33,7 +33,17 @@ NAME    = libft.a
 #今回はsrcフォルダも使ってないので普通にかきます
 # どうでもいいけどライブラリ作るときは下のint mainはコメントアウトで
 SRCS = 	ft_isalpha.c \
-		ft_isdigit.c
+		ft_isdigit.c \
+		ft_isalnum.c \
+		ft_isascii.c
+
+
+# いや、すまんやっぱめんどいのでワイルドカード使うわ。testlib含んじゃうけど...
+# (libtestだけ除外するとかもinfix指定とか使えばできそうではあるが。。。)
+# SRCS = *.c
+# うーん、ワイルドカード使ったら突っかかった。なぜ。。。
+# まあ確かに機械に提出するファイルにlibtest含んでいいのか問題はあったが
+
 
 #---------------------------------------------
 
@@ -80,13 +90,17 @@ $(PROGRAM): $(OBJS)
 
 # 更新されてないファイルの毎回コンパイルされるのを防ぐように、個別の.cについて記載(面倒だけどな...)
 # [復習]　$< は依存ファイル(↓コロンの後に続くファイル名)の先頭のファイル名
-libtest.o: libtest.c
-	$(CC) $(CFLAGS) -c $<
-
+# ソース忘れたけどここはワイルドカード使えないっぽい。。。
 ft_isalpha.o: ft_isalpha.c
 	$(CC) $(CFLAGS) -c $<
 
 ft_isdigit.o: ft_isdigit.c
+	$(CC) $(CFLAGS) -c $<
+
+ft_isalnum.o: ft_isalnum.c
+	$(CC) $(CFLAGS) -c $<
+
+ft_isascii.o: ft_isascii.c
 	$(CC) $(CFLAGS) -c $<
 
 
