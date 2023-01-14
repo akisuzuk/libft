@@ -6,7 +6,7 @@
 /*   By: akisuzuk <akisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 14:01:18 by akisuzuk          #+#    #+#             */
-/*   Updated: 2023/01/14 16:55:03 by akisuzuk         ###   ########.fr       */
+/*   Updated: 2023/01/14 17:30:31 by akisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,12 @@ int	ft_isalnum(char moji);
 int	ft_isalnum(char moji)
 {
 	if ((moji < 'a' || moji > 'z') && (moji < 'A' || moji > 'Z'))
-		return (0);
-	else if (moji < '1' || moji > '9')
-		return (0);
+	{
+		if (moji < '0' || moji > '9')
+			return (0);
+		else
+			return (1);
+	}
 	else
 		return (1);
 }
