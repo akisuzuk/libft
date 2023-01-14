@@ -11,13 +11,10 @@ CFLAGS := -Wall -Wextra -Werror
 
 
 # 実行ファイル名(いままでのa.out)
-#TARGET = exetest
-#PROGRAM = display_file
-PROGRAM = ft_hexdump
-
+PROGRAM = libft
 
 # 生成したい静的ライブラリ名
-#NAME    = hoge.a
+NAME    = libft.a
 
 #---------------------------------------------
 # コンパイル対象としたいプログラム一覧
@@ -33,27 +30,25 @@ PROGRAM = ft_hexdump
 #          ./srcs/ft_strlen.c  \
 #          ./srcs/ft_swap.c
 
-#ワイルドカード使わないなら普通に書くだけ
-SRCS = 	ft_hexdump.c \
-		ft_putstr.c \
-		ft_putnbr.c \
-		ft_strlen.c \
-		ft_strcmp.c
+#今回はsrcフォルダも使ってないので普通にかきます
+# どうでもいいけどライブラリ作るときは下のint mainはコメントアウトで
+SRCS = 	ft_isalpha.c \
+		ft_isdigit.c
+
 #---------------------------------------------
 
 # 生成したいオブジェクトファイル名（基本は拡張子変えるだけ）
 OBJS    = $(SRCS:.c=.o)
 
-
 # インクルードファイルのパス指定
-INC     =
-
-
+# (includeフォルダには.hが格納されている。)
+# こういう書き方ならわかるんだけど、今回はディレクトリの構成を指定されてないから困ったな..
+#INC		= -I./include 
+# まあ、srcsフォルダがなくて手打ちしたのと同じう要領でとりあえず書くか。。。
+INC     = libft.h
 
 # ライブラリファイルのパス指定
 LIB     =
-
-
 
 #==============================================
 # 成規則(ファイルの本体部分)
@@ -65,37 +60,35 @@ LIB     =
 #show_text:
 #        echo $(TEXT)
 
-
-
-#$(NAME): $(OBJS)
+$(NAME): $(OBJS)
         # オブジェクトファイル生成。ライブラリ生成してオブジェクトファイルとリンク
         # ここがミソで、リンクすることでライブラリ内の関数を使用することができるようになる
         # include<stdio.h>した状態
-#		ar rc $(NAME) $(OBJS)
-
+		ar rc $(NAME) $(OBJS)
         # アーカイブの中身のインデックスを生成し、アーカイブ中に格納（とは）
-#		ranlib $(NAME)
+		ranlib $(NAME)
 
-# 今回は静的ライブラリとかないので直接実行
+# プログラムファイル作りたいだけならこれを実行
+# あくまでもライブラリだけ作っておいて他のcファイルと連携したいだけなら不要
+# ライブラリは上のarコマンドで作成できるので
+# なんと！arコマンドでライブラリ作る場合は↓このプログラムを作成する
+# ファイルが生成されない！（ar関係COしたら生成された）
+# ここ、二者択一なのか。。。
+# まあ特に害はなさそうなのでCOせずに残しておく
 $(PROGRAM): $(OBJS)
 	$(CC) -o $(PROGRAM) $^
 
 # 更新されてないファイルの毎回コンパイルされるのを防ぐように、個別の.cについて記載(面倒だけどな...)
 # [復習]　$< は依存ファイル(↓コロンの後に続くファイル名)の先頭のファイル名
-ft_tail.o: ft_hexdump.c
+libtest.o: libtest.c
 	$(CC) $(CFLAGS) -c $<
 
-ft_putstr.o: ft_putstr.c
+ft_isalpha.o: ft_isalpha.c
 	$(CC) $(CFLAGS) -c $<
 
-ft_putnbr.o: ft_putnbr.c
+ft_isdigit.o: ft_isdigit.c
 	$(CC) $(CFLAGS) -c $<
 
-ft_strlen.o: ft_strlen.c
-	$(CC) $(CFLAGS) -c $<
-
-ft_strcmp.o: ft_strcmp.c
-	$(CC) $(CFLAGS) -c $<
 
 # サフィックスルール(とは)
 # c言語で、必ず.cから.oファイルが作られる性質を利用してルール化したもの
@@ -128,3 +121,32 @@ fclean: clean
 
 # fcleanを実行してから改めてコンパイルする
 re: fclean all
+
+
+
+
+
+
+
+#===CPC09-ex00のlibft_crator.shのコードとコメントが参考になるはず===========
+#!/bin/sh
+
+#gcc -c ft_putchar.c |
+#gcc -c ft_swap.c    |
+#gcc -c ft_putstr.c  |
+#gcc -c ft_strlen.c  |
+#gcc -c ft_strcmp.c  |
+
+# ライブラリ化
+# ★ちなみにライブラリはlibで始めないといけないらしいです！
+
+#ar r libft.a ft_putchar.o ft_swap.o ft_putstr.o ft_strlen.o ft_strcmp.o
+
+# ar rcみたくcつけると、アーカイブを作成するメッセージが省略される
+
+# おーうごいた
+# (コマンドライン、shじゃなくてbash開始じゃないとダメだったけど...)
+# 多分今回は必要ないけど、実際にライブラリに格納した関数使いたいファイルmain.c用意して
+# gcc main.c libft.a -o main.exe
+# (main.exeはいつものa.outなので自由に名前変えてどうぞ)
+# とかやると、実行時にmain.cに関数名いうだけで使えるようになってるハズ
