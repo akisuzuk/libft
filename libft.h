@@ -6,7 +6,7 @@
 /*   By: akisuzuk <akisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 09:35:53 by akisuzuk          #+#    #+#             */
-/*   Updated: 2023/01/14 17:13:23 by akisuzuk         ###   ########.fr       */
+/*   Updated: 2023/01/14 17:48:52 by akisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@ int		ft_isalpha(char moji);
 int		ft_isdigit(char moji);
 int		ft_isalnum(char moji);
 int		ft_isascii(char moji);
+int		ft_isprint(char moji);
 
 #endif //__INCLUDE_LIBFT_H__

@@ -35,7 +35,8 @@ NAME    = libft.a
 SRCS = 	ft_isalpha.c \
 		ft_isdigit.c \
 		ft_isalnum.c \
-		ft_isascii.c
+		ft_isascii.c \
+		ft_isprint.c
 
 
 # いや、すまんやっぱめんどいのでワイルドカード使うわ。testlib含んじゃうけど...
@@ -101,6 +102,9 @@ ft_isalnum.o: ft_isalnum.c
 	$(CC) $(CFLAGS) -c $<
 
 ft_isascii.o: ft_isascii.c
+	$(CC) $(CFLAGS) -c $<
+
+ft_isprint.o: ft_isprint.c
 	$(CC) $(CFLAGS) -c $<
 
 
