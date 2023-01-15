@@ -1,31 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akisuzuk <akisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/14 09:35:53 by akisuzuk          #+#    #+#             */
-/*   Updated: 2023/01/15 16:54:48 by akisuzuk         ###   ########.fr       */
+/*   Created: 2023/01/15 12:25:57 by akisuzuk          #+#    #+#             */
+/*   Updated: 2023/01/15 13:07:59 by akisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
-
-// テスター用に色々インクルード
 #include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
 #include <string.h>
-#include <climits>
-#include <limits.h>
 
-int		ft_isalpha(char moji);
-int		ft_isdigit(char moji);
-int		ft_isalnum(char moji);
-int		ft_isascii(char moji);
-int		ft_isprint(char moji);
-int		ft_strlen(char *str);
+int	ft_strlen(char *str);
 
-#endif //__INCLUDE_LIBFT_H__
+int	ft_strlen(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		i++;
+	}
+	return (i);
+}
+
+//int	main(void)
+//{
+//	int	len;
+//
+//	len = ft_strlen("ab--cdef-gttt");
+//	printf("len=%d", len);
+//	return (0);
+//}
