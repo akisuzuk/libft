@@ -37,8 +37,9 @@ SRCS = 	ft_isalpha.c \
 		ft_isalnum.c \
 		ft_isascii.c \
 		ft_isprint.c \
-		ft_strlen.c  \
-		ft_memset.c
+		ft_strlen.c \
+		ft_memset.c \
+		ft_bzero.c
 
 
 # いや、すまんやっぱめんどいのでワイルドカード使うわ。testlib含んじゃうけど...
@@ -115,6 +116,8 @@ ft_strlen.o: ft_strlen.c
 ft_memset.o: ft_memset.c
 	$(CC) $(CFLAGS) -c $<
 
+ft_bzero.o: ft_bzero.c
+	$(CC) $(CFLAGS) -c $<
 
 # サフィックスルール(とは)
 # c言語で、必ず.cから.oファイルが作られる性質を利用してルール化したもの
