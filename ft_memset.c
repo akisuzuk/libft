@@ -6,7 +6,7 @@
 /*   By: akisuzuk <akisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 17:15:47 by akisuzuk          #+#    #+#             */
-/*   Updated: 2023/01/22 15:33:53 by akisuzuk         ###   ########.fr       */
+/*   Updated: 2023/01/22 15:43:24 by akisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void	*ft_memset(void *b, int c, size_t len)
 	{
 		*unchar_b++ = unchar_c;
 		i++;
-		write(1, "loop\n", 5);
 	}
 	return (unchar_b);
 }
