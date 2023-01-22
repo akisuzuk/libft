@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akisuzuk <akisuzuk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akisuzuk <XXX>                             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 17:15:47 by akisuzuk          #+#    #+#             */
-/*   Updated: 2023/01/17 21:58:14 by akisuzuk         ###   ########.fr       */
+/*   Updated: 2023/01/19 00:15:04 by akisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,26 @@ void	*ft_memset(void *b, int c, size_t len)
 {
 	int				i;
 	int				int_len;
-	unsigned char	unchar;
-	char			*char_b;
+	unsigned char	unchar_c;
+	unsigned char	*unchar_b;
+	char			*ret;
 
 	i = 0;
+	unchar_b = (unsigned char *)b;
+	unchar_c = (unsigned char)c;
 	int_len = (int)len;
-	unchar = (char)c;
-	char_b = (char *)b;
-	while (i < int_len && char_b[i] != '\0')
+	printf("unchar_c=%hhu\n", unchar_c);
+	printf("int_len=%d\n", int_len);
+	while (i < int_len && unchar_b[i] != '\0')
 	{
-		char_b[i] = unchar;
+		unchar_b[i] = unchar_c;
+	//	char_b[i] = 'X'; // 例えばこれだと消えずにちゃんと文字が置き換えられる。。。
 		i++;
+		write(1, "loop\n", 5);
 	}
-	return (char_b);
+	ret = (char *)unchar_b;
+	printf("ret=%s\n", unchar_b);
+	return (ret);
 }
 
 int	main(void)
