@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akisuzuk <akisuzuk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akisuzuk <XXX>                             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 17:15:47 by akisuzuk          #+#    #+#             */
-/*   Updated: 2023/01/22 18:51:26 by akisuzuk         ###   ########.fr       */
+/*   Updated: 2023/01/26 23:58:04 by akisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,41 @@
 #include <unistd.h>
 
 // 	restrictが使えないならmemcpyと一緒だよね。。。？
+// 違いましたーアホです。書き込み領域被ってると書き込みながら書き込みもとが変更される可能性がある
+// なのでポインタの大小を比較して、被らない方向からコピってけばOK
+
+// あれ、なんでマイナスインクリメントは前置なんだろ
+// 前置だとインクリメントしてから代入だよね
+// 調べたら、+=int_lenは指定範囲を一つ超えたとこを指してるっぽい(1文字コピるならlen=0が正しいので)
+// なので、正確には書き換え部分は+=(int_len -1)から始まるからインクリメントは前置で
+// ポインタずらしてから代入する必要があると
+// 理由として、ポインタに整数値の加減算をするとき、結果のポインタは
+// 同じ配列ないの要素を指すか、配列の最後の要素を一つ超えたところを刺さなければならないからです
+// 全くわからないけどそういうことらしいです＼(^o^)／
 void	*ft_memmove(void *dst, const void *src, size_t len);
 
 void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	int					i;
 	int					int_len;
 	unsigned char		*unchar_dst;
 	const unsigned char	*cons_unchar_src;
 
 	if (len != 0)
 	{
-		i = 0;
 		unchar_dst = (unsigned char *)dst;
 		cons_unchar_src = (const unsigned char *)src;
 		int_len = (int)len;
-		while (i < int_len)
+		if (dst <= src)
 		{
-			*unchar_dst++ = *cons_unchar_src++;
-			i++;
+			while (int_len--)
+				*unchar_dst++ = *cons_unchar_src++;
+		}
+		else
+		{
+			unchar_dst += int_len;
+			cons_unchar_src += int_len;
+			while (int_len--)
+				*--unchar_dst = *--cons_unchar_src;
 		}
 		return (unchar_dst);
 	}
