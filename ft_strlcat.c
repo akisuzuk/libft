@@ -6,92 +6,88 @@
 /*   By: akisuzuk <akisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 08:10:05 by akisuzuk          #+#    #+#             */
-/*   Updated: 2022/03/25 17:45:56 by akisuzuk         ###   ########.fr       */
+/*   Updated: 2023/01/28 17:52:03 by akisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+// 最後の返り値。count does not include NUL であることに注意
+// あああああああああああああああ定義間違えてたああああああああああ
+// dstsize分追加じゃなくて、最大size-strlen(dst)-1バイト文字列を追加、だったわ。。。
+// カスすぎる。。。アルゴリズムは絶対合ってると思ってたので、おかしいと思ってた
+// 長考しすぎなくてよかったけど半日消し飛んでクソすぎる。。。
+// だから引数をそのまま使わずに新しく変数定義してたのか。。。書き込む量を計算するために...
+
+// dstsizeを実際のdstの大きさに指定するのが前提、という点に注意
+// テスターは空気読まずにdstsizeに整数入れてくるかも知んねえけど、
+// dlen=d-dstは基本的にはdstのサイズと一致するという前提
+
+// ここも完全に盲点だったけど、戻り値は作成しようと"試みる"文字列の長さらしいです
+// なので、if(n=0)の処理で実際に結合していないのに戻り値は足した数を吐いてるのか...
+// もう関わりたくねえこいつwww
+
+// で、結合するwhileの中でn!=1にしてるのは「size-strlen(dst)-1バイト」の「-1バイト」ってことね
 
 #include <stdio.h>
 #include <string.h>
 
-unsigned int	ft_strlcat(char *dest, char *src, unsigned int size);
+size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
 
-unsigned int	ft_strlcat(char *dest, char *src, unsigned int size)
+size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 {
-	unsigned int	slen;
-	unsigned int	dlen;
-	unsigned int	i;
+	char		*d;
+	const char	*s;
+	size_t		n;
+	size_t		dlen;
 
-	slen = 0;
-	while (src[slen] != '\0')
-		slen++;
-	dlen = 0;
-	while (dest[dlen] != '\0')
-		dlen++;
-	i = 0;
-	while (i < size - dlen - 1)
+	d = dst;
+	s = src;
+	n = dstsize;
+	while (n-- != 0 && *d != '\0')
+		d++;
+	dlen = d - dst;
+	n = dstsize - dlen;
+	if (n == 0)
+		return (dlen + strlen(s));
+	while (*s != '\0')
 	{
-		dest[dlen + i] = src[i];
-		if (i == size - 1 || i == slen - 1)
+		if (n != 1)
 		{
-			dest[dlen + i + 1] = '\0';
-			return (slen + dlen);
+			*d++ = *s;
+			n--;
 		}
-		i++;
+		s++;
 	}
-	return (slen + dlen);
+	*d = '\0';
+	return (dlen + (s - src));
 }
 
 /*
 int	main(void)
 {
-	char			str1[10];
-	char			str2[4];
-	unsigned int	n;
-
-	str1[0] = 'a';
-	str1[1] = 'b';
-	str1[2] = 'c';
-	str1[3] = '\0';
-	str1[4] = '\0';
-	str1[5] = '\0';
-	str1[6] = '\0';
-	str1[7] = '\0';
-	str1[8] = '\0';
-	str1[9] = '\0';
-	str2[0] = 'd';
-	str2[1] = 'e';
-	str2[2] = 'f';
-	str2[3] = '\0';
-	n = sizeof(str1);
-	printf("sizeof str1=%d\n", n);
+	// あれっターミナルの検証がうまくいってなかったの、printfの書式とかが原因か。。。？
+	char			str1[] = "AAAAAAAAAA";
+	const char			str2[] = "BBB";
+	
 	printf("%s\n", str1);
 	printf("%s\n", str2);
-	printf("ret = %d\n", ft_strlcat(str1, str2, n));
+	printf("ret = %zu\n", ft_strlcat(str1, str2, sizeof(str1)));
 	printf("%s\n", str1);
 	printf("%s\n", str2);
 	printf("-------------\n");
-	str1[0] = 'a';
-	str1[1] = 'b';
-	str1[2] = 'c';
-	str1[3] = '\0';
-	str1[4] = '\0';
-	str1[5] = '\0';
-	str1[6] = '\0';
-	str1[7] = '\0';
-	str1[8] = '\0';
-	str1[9] = '\0';
-	str2[0] = 'd';
-	str2[1] = 'e';
-	str2[2] = 'f';
-	str2[3] = '\0';
-	printf("%s\n", str1);
-	printf("%s\n", str2);
-	printf("ret = %lu\n", strlcat(str1, str2, n));
-	printf("%s\n", str1);
-	printf("%s\n", str2);
+
+	char			str3[] = "AAAAAAAAAA";
+	char			str4[] = "BBB";
+	printf("%s\n", str3);
+	printf("%s\n", str4);
+	printf("ret = %zu\n", strlcat(str3, str4, sizeof(str3)));
+	printf("%s\n", str3);
+	printf("%s\n", str4);
 	return (0);
 }
 */
+
+
+
 /*
 int	main(void)
 {
