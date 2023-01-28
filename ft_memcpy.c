@@ -6,7 +6,7 @@
 /*   By: akisuzuk <akisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 17:15:47 by akisuzuk          #+#    #+#             */
-/*   Updated: 2023/01/22 17:45:55 by akisuzuk         ###   ########.fr       */
+/*   Updated: 2023/01/27 21:48:59 by akisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 			*unchar_dst++ = *cons_unchar_src++;
 			i++;
 		}
-		return (unchar_dst);
+		return (dst);
 	}
 	return (dst);
 }

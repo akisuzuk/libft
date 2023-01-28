@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akisuzuk <XXX>                             +#+  +:+       +#+        */
+/*   By: akisuzuk <akisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 17:15:47 by akisuzuk          #+#    #+#             */
-/*   Updated: 2023/01/26 23:58:04 by akisuzuk         ###   ########.fr       */
+/*   Updated: 2023/01/27 21:44:54 by akisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,71 +26,73 @@
 // 理由として、ポインタに整数値の加減算をするとき、結果のポインタは
 // 同じ配列ないの要素を指すか、配列の最後の要素を一つ超えたところを刺さなければならないからです
 // 全くわからないけどそういうことらしいです＼(^o^)／
+
+// これ、if突入した後にreturn (unchar_dst)ってするとテスター弾かれるのなんなんだ
+// memcpyはそれでもok出たのに。。。
 void	*ft_memmove(void *dst, const void *src, size_t len);
 
 void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	int					int_len;
+	int 				int_len;
 	unsigned char		*unchar_dst;
 	const unsigned char	*cons_unchar_src;
 
-	if (len != 0)
+	int_len = (int)len;
+	unchar_dst = (unsigned char *)dst;
+	cons_unchar_src = (const unsigned char *)src;
+	if (dst <= src)
 	{
-		unchar_dst = (unsigned char *)dst;
-		cons_unchar_src = (const unsigned char *)src;
-		int_len = (int)len;
-		if (dst <= src)
-		{
-			while (int_len--)
-				*unchar_dst++ = *cons_unchar_src++;
-		}
-		else
-		{
-			unchar_dst += int_len;
-			cons_unchar_src += int_len;
-			while (int_len--)
-				*--unchar_dst = *--cons_unchar_src;
-		}
-		return (unchar_dst);
+		while (int_len--)
+			*unchar_dst++ = *cons_unchar_src++;
+	}
+	else
+	{
+		unchar_dst += int_len;
+		cons_unchar_src += int_len;
+		while (int_len--)
+			*--unchar_dst = *--cons_unchar_src;
 	}
 	return (dst);
 }
 
-int	main(void)
-{
-	char	str1[256];
-	char	str2[256];
-	int		n;
-
-	str1[0] = 'a';
-	str1[1] = 'b';
-	str1[2] = 'c';
-	str1[3] = 'd';
-	str1[4] = 'e';
-	str1[5] = '\0';
-	str2[0] = 'A';
-	str2[1] = 'B';
-	str2[2] = 'C';
-	str2[3] = '\0';
-	n = 0;
-	printf("str1=%s\n", str1);
-	printf("%s\n", str2);
-	//ft_memmove(str1+1, str2, 2);
-	memmove(str1+1, str2, 2);
-	printf("str1=%s\n", str1);
-	printf("%s\n", str2);
-
-	char s[] = {65, 66, 67, 68, 69, 0, 45};
-	char s0[] = { 0,  0,  0,  0,  0,  0, 0};
-	char sCpy[] = {65, 66, 67, 68, 69, 0, 45};
-	char sResult[] = {67, 68, 67, 68, 69, 0, 45};
-	char sResult2[] = {67, 67, 68, 68, 69, 0, 45};
-
-	//ft_memmove(s0, s, 7);
-	//memmove(s0, s, 7);
-	printf("s=%s\n", s);
-	ft_memmove(s, s+2, 2);
-	//memmove(s, s+2, 2);
-	printf("result=%s\n", s);
-	return (0);
-}
+//
+//int	main(void)
+//{
+////	char	str1[256];
+////	char	str2[256];
+////	int		n;
+////
+////	str1[0] = 'a';
+////	str1[1] = 'b';
+////	str1[2] = 'c';
+////	str1[3] = 'd';
+////	str1[4] = 'e';
+////	str1[5] = '\0';
+////	str2[0] = 'A';
+////	str2[1] = 'B';
+////	str2[2] = 'C';
+////	str2[3] = '\0';
+////	n = 0;
+////	printf("str1=%s\n", str1);
+////	printf("%s\n", str2);
+////	//ft_memmove(str1+1, str2, 2);
+////	memmove(str1+1, str2, 2);
+////	printf("str1=%s\n", str1);
+////	printf("%s\n", str2);
+////
+//	char s[] = {65, 66, 67, 68, 69, 0, 45};
+//	char s0[] = { 0,  0,  0,  0,  0,  0, 0};
+//	char sCpy[] = {65, 66, 67, 68, 69, 0, 45};
+//	char sResult[] = {67, 68, 67, 68, 69, 0, 45};
+//	char sResult2[] = {67, 67, 68, 68, 69, 0, 45};
+//
+//	//ft_memmove(s0, s, 7);
+//	//memmove(s0, s, 7);
+//	printf("dst=%s\n", s0);
+//	printf("src=%s\n", s);
+//	ft_memmove(s0, s, 7);
+//	memmove(s0, s, 7);
+//	printf("dst_after=%s\n", s);
+//	return (0);
+//}
+//
