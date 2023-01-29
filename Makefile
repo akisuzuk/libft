@@ -42,7 +42,10 @@ SRCS = 	ft_isalpha.c \
 		ft_bzero.c \
 		ft_memcpy.c \
 		ft_memmove.c \
-		ft_strlcpy.c
+		ft_strlcpy.c \
+		ft_strlcat.c \
+		ft_toupper.c \
+		ft_tolower.c
 
 
 # いや、すまんやっぱめんどいのでワイルドカード使うわ。testlib含んじゃうけど...
@@ -128,7 +131,16 @@ ft_memcpy.o: ft_memcpy.c
 ft_memmove.o: ft_memmove.c
 	$(CC) $(CFLAGS) -c $<
 
-ft_strlcpyo: ft_strlcpy.c
+ft_strlcpy: ft_strlcpy.c
+	$(CC) $(CFLAGS) -c $<
+
+ft_strlcat: ft_strlcat.c
+	$(CC) $(CFLAGS) -c $<
+
+ft_toupper: ft_toupper.c
+	$(CC) $(CFLAGS) -c $<
+
+ft_tolower: ft_tolower.c
 	$(CC) $(CFLAGS) -c $<
 
 # サフィックスルール(とは)
