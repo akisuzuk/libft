@@ -49,7 +49,9 @@ SRCS = 	ft_isalpha.c \
 		ft_strchr.c \
 		ft_strrchr.c \
 		ft_strncmp.c \
-		ft_memchr.c
+		ft_memchr.c \
+		ft_memcmp.c \
+		ft_strnstr.c
 
 
 # いや、すまんやっぱめんどいのでワイルドカード使うわ。testlib含んじゃうけど...
@@ -67,7 +69,7 @@ OBJS    = $(SRCS:.c=.o)
 # インクルードファイルのパス指定
 # (includeフォルダには.hが格納されている。)
 # こういう書き方ならわかるんだけど、今回はディレクトリの構成を指定されてないから困ったな..
-#INC		= -I./include 
+#INC		= -I./include
 # まあ、srcsフォルダがなくて手打ちしたのと同じう要領でとりあえず書くか。。。
 INC     = libft.h
 
@@ -131,7 +133,7 @@ ft_bzero.o: ft_bzero.c
 
 ft_memcpy.o: ft_memcpy.c
 	$(CC) $(CFLAGS) -c $<
-	
+
 ft_memmove.o: ft_memmove.c
 	$(CC) $(CFLAGS) -c $<
 
@@ -157,6 +159,12 @@ ft_strncmp: ft_strncmp.c
 	$(CC) $(CFLAGS) -c $<
 
 ft_memchr: ft_memchr.c
+	$(CC) $(CFLAGS) -c $<
+
+ft_memcmp: ft_memcmp.c
+	$(CC) $(CFLAGS) -c $<
+
+ft_strnstr: ft_strnstr.c
 	$(CC) $(CFLAGS) -c $<
 
 # サフィックスルール(とは)
