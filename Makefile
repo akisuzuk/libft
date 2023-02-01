@@ -50,7 +50,8 @@ SRCS = 	ft_isalpha.c \
 		ft_strrchr.c \
 		ft_strncmp.c \
 		ft_memchr.c \
-		ft_memcmp.c
+		ft_memcmp.c \
+		ft_strnstr.c
 
 
 # いや、すまんやっぱめんどいのでワイルドカード使うわ。testlib含んじゃうけど...
@@ -161,6 +162,9 @@ ft_memchr: ft_memchr.c
 	$(CC) $(CFLAGS) -c $<
 
 ft_memcmp: ft_memcmp.c
+	$(CC) $(CFLAGS) -c $<
+
+ft_strnstr: ft_strnstr.c
 	$(CC) $(CFLAGS) -c $<
 
 # サフィックスルール(とは)
