@@ -53,7 +53,9 @@ SRCS = 	ft_isalpha.c \
 		ft_memcmp.c \
 		ft_strnstr.c \
 		ft_atoi.c \
-		ft_calloc.c
+		ft_calloc.c \
+		ft_strdup.c \
+		ft_strjoin.c
 
 
 # いや、すまんやっぱめんどいのでワイルドカード使うわ。testlib含んじゃうけど...
@@ -173,6 +175,12 @@ ft_atoi: ft_atoi.c
 	$(CC) $(CFLAGS) -c $<
 
 ft_calloc: ft_calloc.c
+	$(CC) $(CFLAGS) -c $<
+
+ft_strdup: ft_strdup.c
+	$(CC) $(CFLAGS) -c $<
+
+ft_strjoin: ft_strjoin.c
 	$(CC) $(CFLAGS) -c $<
 
 # サフィックスルール(とは)
