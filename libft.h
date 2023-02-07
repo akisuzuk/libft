@@ -6,7 +6,7 @@
 /*   By: akisuzuk <akisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 09:35:53 by akisuzuk          #+#    #+#             */
-/*   Updated: 2023/02/05 12:35:57 by akisuzuk         ###   ########.fr       */
+/*   Updated: 2023/02/07 23:15:58 by akisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
-#include <climits>
+// #include <climits>
 #include <limits.h>
 
 int		ft_isalpha(char moji);
