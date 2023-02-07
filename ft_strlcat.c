@@ -6,7 +6,7 @@
 /*   By: akisuzuk <akisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 08:10:05 by akisuzuk          #+#    #+#             */
-/*   Updated: 2023/01/28 17:52:03 by akisuzuk         ###   ########.fr       */
+/*   Updated: 2023/02/07 22:34:31 by akisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,6 @@ int	main(void)
 }
 */
 
-
-
 /*
 int	main(void)
 {
@@ -102,8 +100,7 @@ int	main(void)
 	i = 0;
 	while (i < 11)
 	{
-		dest[10] = "abc";
-		printf("--------------\n");
+		dest[10] = "abc"; printf("--------------\n");
 		printf("i = %d, \tstrlcat = %lu\n", i, strlcat(dest, src, i));
 		printf("dest= %s\n", dest);
 		i++;
