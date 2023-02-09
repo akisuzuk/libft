@@ -1,35 +1,20 @@
-#==============================================
-# Makefileの中で用いる変数（マクロ）の設定
-#==============================================
-# コンパイラの指定
-CC     := gcc  # ":="は単純展開マクロ、"="は再起展開マクロ
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile_yshimoda                                  :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: akisuzuk <akisuzuk@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/02/07 23:05:50 by akisuzuk          #+#    #+#              #
+#    Updated: 2023/02/07 23:21:18 by akisuzuk         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-# コンパイルオプションの指定
+CC     := cc
 CFLAGS := -Wall -Wextra -Werror
 
-
-# 実行ファイル名(いままでのa.out)
-PROGRAM = libft
-
-# 生成したい静的ライブラリ名
 NAME    = libft.a
 
-#---------------------------------------------
-# コンパイル対象としたいプログラム一覧
-#SRCDIR  = ./srcs
-#SRCS     = $(wildcard $(SRCDIR)/*.c)
-# ↑とりあえず回すためにワイルドカードにしたけど、無関係な.c読み込まないようにすべきらしい
-# あとディレクトリも変数化(SRCDIR)して簡潔に記述したかったのに認識されない...
-
-# めんどくさいけど、名指しの場合はひとつづつ記述。ディレクトリも変数化せず手打ち
-#SRCS    = ./srcs/ft_putchar.c \
-#		  ./srcs/ft_putstr.c  \
-#          ./srcs/ft_strcmp.c  \
-#          ./srcs/ft_strlen.c  \
-#          ./srcs/ft_swap.c
-
-#今回はsrcフォルダも使ってないので普通にかきます
-# どうでもいいけどライブラリ作るときは下のint mainはコメントアウトで
 SRCS = 	ft_isalpha.c \
 		ft_isdigit.c \
 		ft_isalnum.c \
@@ -55,189 +40,22 @@ SRCS = 	ft_isalpha.c \
 		ft_strdup.c \
 		ft_strjoin.c
 
-
-# いや、すまんやっぱめんどいのでワイルドカード使うわ。testlib含んじゃうけど...
-# (libtestだけ除外するとかもinfix指定とか使えばできそうではあるが。。。)
-# SRCS = *.c
-# うーん、ワイルドカード使ったら突っかかった。なぜ。。。
-# まあ確かに機械に提出するファイルにlibtest含んでいいのか問題はあったが
-
-
-#---------------------------------------------
-
-# 生成したいオブジェクトファイル名（基本は拡張子変えるだけ）
 OBJS    = $(SRCS:.c=.o)
 
-# インクルードファイルのパス指定
-# (includeフォルダには.hが格納されている。)
-# こういう書き方ならわかるんだけど、今回はディレクトリの構成を指定されてないから困ったな..
-#INC		= -I./include
-# まあ、srcsフォルダがなくて手打ちしたのと同じう要領でとりあえず書くか。。。
-INC     = libft.h
-
-# ライブラリファイルのパス指定
-LIB     =
-
-#==============================================
-# 成規則(ファイルの本体部分)
-#==============================================
-# まず基本の肩は。コマンド名:→(改行＆タブ)→呼び出されるルール
-# "make"コマンドを実行するとMakefile中で一番最初に見つかるルールが適用される
-# 例を示すと↓
-#TEXT = "this is a sample."
-#show_text:
-#        echo $(TEXT)
+.c.o:
+	$(CC) $(CFLAGS) $(INC) -c $< -o $@
 
 $(NAME): $(OBJS)
-        # オブジェクトファイル生成。ライブラリ生成してオブジェクトファイルとリンク
-        # ここがミソで、リンクすることでライブラリ内の関数を使用することができるようになる
-        # include<stdio.h>した状態
-		ar rc $(NAME) $(OBJS)
-        # アーカイブの中身のインデックスを生成し、アーカイブ中に格納（とは）
-		ranlib $(NAME)
+		ar rcs $(NAME) $(OBJS)
 
-# プログラムファイル作りたいだけならこれを実行
-# あくまでもライブラリだけ作っておいて他のcファイルと連携したいだけなら不要
-# ライブラリは上のarコマンドで作成できるので
-# なんと！arコマンドでライブラリ作る場合は↓このプログラムを作成する
-# ファイルが生成されない！（ar関係COしたら生成された）
-# ここ、二者択一なのか。。。
-# まあ特に害はなさそうなのでCOせずに残しておく
-$(PROGRAM): $(OBJS)
-	$(CC) -o $(PROGRAM) $^
+all: $(NAME)
 
-# 更新されてないファイルの毎回コンパイルされるのを防ぐように、個別の.cについて記載(面倒だけどな...)
-# [復習]　$< は依存ファイル(↓コロンの後に続くファイル名)の先頭のファイル名
-# ソース忘れたけどここはワイルドカード使えないっぽい。。。
-ft_isalpha.o: ft_isalpha.c
-	$(CC) $(CFLAGS) -c $<
-
-ft_isdigit.o: ft_isdigit.c
-	$(CC) $(CFLAGS) -c $<
-
-ft_isalnum.o: ft_isalnum.c
-	$(CC) $(CFLAGS) -c $<
-
-ft_isascii.o: ft_isascii.c
-	$(CC) $(CFLAGS) -c $<
-
-ft_isprint.o: ft_isprint.c
-	$(CC) $(CFLAGS) -c $<
-
-ft_strlen.o: ft_strlen.c
-	$(CC) $(CFLAGS) -c $<
-
-ft_memset.o: ft_memset.c
-	$(CC) $(CFLAGS) -c $<
-
-ft_bzero.o: ft_bzero.c
-	$(CC) $(CFLAGS) -c $<
-
-ft_memcpy.o: ft_memcpy.c
-	$(CC) $(CFLAGS) -c $<
-
-ft_memmove.o: ft_memmove.c
-	$(CC) $(CFLAGS) -c $<
-
-ft_strlcpy: ft_strlcpy.c
-	$(CC) $(CFLAGS) -c $<
-
-ft_strlcat: ft_strlcat.c
-	$(CC) $(CFLAGS) -c $<
-
-ft_toupper: ft_toupper.c
-	$(CC) $(CFLAGS) -c $<
-
-ft_tolower: ft_tolower.c
-	$(CC) $(CFLAGS) -c $<
-
-ft_strchr: ft_strchr.c
-	$(CC) $(CFLAGS) -c $<
-
-ft_strrchr: ft_strrchr.c
-	$(CC) $(CFLAGS) -c $<
-
-ft_strncmp: ft_strncmp.c
-	$(CC) $(CFLAGS) -c $<
-
-ft_memchr: ft_memchr.c
-	$(CC) $(CFLAGS) -c $<
-
-ft_memcmp: ft_memcmp.c
-	$(CC) $(CFLAGS) -c $<
-
-ft_strnstr: ft_strnstr.c
-	$(CC) $(CFLAGS) -c $<
-
-ft_atoi: ft_atoi.c
-	$(CC) $(CFLAGS) -c $<
-
-ft_calloc: ft_calloc.c
-	$(CC) $(CFLAGS) -c $<
-
-ft_strdup: ft_strdup.c
-	$(CC) $(CFLAGS) -c $<
-
-ft_strjoin: ft_strjoin.c
-	$(CC) $(CFLAGS) -c $<
-
-# サフィックスルール(とは)
-# c言語で、必ず.cから.oファイルが作られる性質を利用してルール化したもの
-#.c.o:
-#	$(CC) -c $< -o $@
-.c.o:
-	$(CC) $(CFLAGS) -c $<
-
-
-
-
-#==============================================
-# make 以外の操作がしたいとき
-#==============================================
-
-# 全部実行するコマンド
-# .cからおbジェクトファイル生成
-# →静的ライブラリ.aを生成し、すべてのお部jr区とファイルをリンクさせる
-# →.aにインデックスを付与（←これよく分からん）
-all: $(PROGRAM)
-
-# オブジェクトファイルのみ削除
 clean:
 		rm -f $(OBJS)
 
-# すべてのオブジェクトファイルに加え、実行ファイルや静的ライブラリを削除
-#
 fclean: clean
-		rm -f $(PROGRAM)
+		rm -f $(NAME)
 
-# fcleanを実行してから改めてコンパイルする
 re: fclean all
 
-
-
-
-
-
-
-#===CPC09-ex00のlibft_crator.shのコードとコメントが参考になるはず===========
-#!/bin/sh
-
-#gcc -c ft_putchar.c |
-#gcc -c ft_swap.c    |
-#gcc -c ft_putstr.c  |
-#gcc -c ft_strlen.c  |
-#gcc -c ft_strcmp.c  |
-
-# ライブラリ化
-# ★ちなみにライブラリはlibで始めないといけないらしいです！
-
-#ar r libft.a ft_putchar.o ft_swap.o ft_putstr.o ft_strlen.o ft_strcmp.o
-
-# ar rcみたくcつけると、アーカイブを作成するメッセージが省略される
-
-# おーうごいた
-# (コマンドライン、shじゃなくてbash開始じゃないとダメだったけど...)
-# 多分今回は必要ないけど、実際にライブラリに格納した関数使いたいファイルmain.c用意して
-# gcc main.c libft.a -o main.exe
-# (main.exeはいつものa.outなので自由に名前変えてどうぞ)
-# とかやると、実行時にmain.cに関数名いうだけで使えるようになってるハズ
+.PHONY: all clean fclean re
