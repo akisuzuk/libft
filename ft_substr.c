@@ -6,7 +6,7 @@
 /*   By: akisuzuk <akisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 10:09:35 by akisuzuk          #+#    #+#             */
-/*   Updated: 2023/02/09 21:50:05 by akisuzuk         ###   ########.fr       */
+/*   Updated: 2023/02/09 22:04:24 by akisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,13 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	if(!ret)
 		return (NULL);
 	head = ret;
-	while(start--)
+	while(start-- && *s != '\0')
+	{
+		printf("loop\n");
 		s++;
-	while(len--)
+	}
+		//s++;
+	while(len-- && *s != '\0')
 		*ret++ = *s++;
 	*ret = '\0';
 	return (head);
