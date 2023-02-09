@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    Makefile_yshimoda                                  :+:      :+:    :+:    #
+#    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: akisuzuk <akisuzuk@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/07 23:05:50 by akisuzuk          #+#    #+#              #
-#    Updated: 2023/02/07 23:21:18 by akisuzuk         ###   ########.fr        #
+#    Updated: 2023/02/09 21:40:23 by akisuzuk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,8 @@ SRCS = 	ft_isalpha.c \
 		ft_atoi.c \
 		ft_calloc.c \
 		ft_strdup.c \
-		ft_strjoin.c
+		ft_strjoin.c \
+		ft_substr.c
 
 OBJS    = $(SRCS:.c=.o)
 
