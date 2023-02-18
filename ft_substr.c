@@ -6,7 +6,7 @@
 /*   By: akisuzuk <akisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 10:09:35 by akisuzuk          #+#    #+#             */
-/*   Updated: 2023/02/09 22:04:24 by akisuzuk         ###   ########.fr       */
+/*   Updated: 2023/02/18 11:25:28 by akisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,40 @@
 #include <math.h>
 
 char	*ft_substr(char const *s, unsigned int start, size_t len);
+int		ft_strlen(char *str);
+
+int	ft_strlen(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		i++;
+	}
+	return (i);
+}
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*ret;
 	char	*head;
+	int		s_len;
+	int		int_len;
 
-	if(!s)
+	if (!s)
 		return (NULL);
-	ret = malloc(len + 1);
-	if(!ret)
+	s_len = ft_strlen((char *) s);
+	int_len = (int)len;
+	if (int_len > s_len)
+		len = (size_t)s_len;
+	ret = malloc((sizeof(char) * len + 1));
+	if (!ret)
 		return (NULL);
 	head = ret;
-	while(start-- && *s != '\0')
-	{
-		printf("loop\n");
+	while (start-- && *s != '\0')
 		s++;
-	}
-		//s++;
-	while(len-- && *s != '\0')
+	while (len-- && *s != '\0')
 		*ret++ = *s++;
 	*ret = '\0';
 	return (head);
