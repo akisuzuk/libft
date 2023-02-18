@@ -6,7 +6,7 @@
 /*   By: akisuzuk <akisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 18:40:53 by akisuzuk          #+#    #+#             */
-/*   Updated: 2023/02/09 21:08:56 by akisuzuk         ###   ########.fr       */
+/*   Updated: 2023/02/18 11:52:26 by akisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,29 @@
 #include <math.h>
 
 char	*store(char *pre, char *suf, char *ret);
+char	*store_2(char *suf, char *ret, int j);
 int		ft_strlen(char *str);
 char	*generate(char *pre, char *suf);
 char	*ft_strjoin(char const *s1, char const *s2);
+
+char	*store_2(char *suf, char *ret, int j)
+{
+	int	i;
+
+	i = 0;
+	if (suf[i] == '\0')
+		ret[j] = '\0';
+	else
+	{
+		while (suf[i] != '\0')
+		{
+			ret[j] = suf[i];
+			i++;
+			j++;
+		}
+	}
+	return (ret);
+}
 
 char	*store(char *pre, char *suf, char *ret)
 {
@@ -60,18 +80,7 @@ char	*store(char *pre, char *suf, char *ret)
 			j++;
 		}
 	}
-	i = 0;
-	if (suf[i] == '\0')
-		ret[j] = '\0';
-	else
-	{
-		while (suf[i] != '\0')
-		{
-			ret[j] = suf[i];
-			i++;
-			j++;
-		}
-	}
+	ret = store_2(suf, ret, j);
 	return (ret);
 }
 
@@ -121,7 +130,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 //int	main(void)
 //{
-//	char	str1[] = "";
+//	char	str1[] = "tripouille";
 //	char	str2[] = "42";
 //	char	*joined;
 //
@@ -134,4 +143,4 @@ char	*ft_strjoin(char const *s1, char const *s2)
 //	printf("strcmp=%d\n", strcmp(joined, "42"));
 //	free(joined);
 //}
-
+//

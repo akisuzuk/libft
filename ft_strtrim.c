@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akisuzuk <akisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/05 10:09:35 by akisuzuk          #+#    #+#             */
-/*   Updated: 2023/02/18 13:01:55 by akisuzuk         ###   ########.fr       */
+/*   Created: 2022/03/28 18:40:53 by akisuzuk          #+#    #+#             */
+/*   Updated: 2023/02/18 15:58:55 by akisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+// テストケースを見るに、スペースは詰められるみたいですね
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
 
-char	*ft_substr(char const *s, unsigned int start, size_t len);
 int		ft_strlen(char *str);
+char	*ft_strtrim(char const *s1, char const *set);
 
 int	ft_strlen(char *str)
 {
@@ -30,39 +32,51 @@ int	ft_strlen(char *str)
 	return (i);
 }
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_strtrim(char const *s1, char const *set)
 {
-	char	*ret;
 	char	*head;
-	int		s_len;
-	int		int_len;
+	char	*ret;
+	int		i;
 
-	if (!s)
+	if (! s1)
 		return (NULL);
-	s_len = ft_strlen((char *) s);
-	int_len = (int)len;
-	if (int_len > s_len)
-		len = (size_t)s_len;
-	ret = malloc((sizeof(char) * len + 1));
+	if (! set)
+		return ((char *)s1);
+	ret = malloc(sizeof(char) * ft_strlen((char *)s1) + 1);
 	if (!ret)
 		return (NULL);
 	head = ret;
-	while (start-- && *s != '\0')
-		s++;
-	while (len-- && *s != '\0')
-		*ret++ = *s++;
+	while (*s1)
+	{
+		i = 0;
+		while (*set)
+		{
+			if (*s1 == *set)
+				break ;
+			set++;
+			if (*set == '\0')
+				*ret++ = *s1;
+			i++;
+		}
+		set = set - i;
+		s1++;
+	}
 	*ret = '\0';
 	return (head);
 }
 
+//
 //int	main(void)
 //{
-//	char	str1[] = "abcdefgh";
-//	char	*sub;
+//	char	str1[] = "123";
+//	char	str2[] = "";
+//	char	*joined;
 //
 //	printf("str1=%s\n", str1);
-//	sub = ft_substr(str1, 2, 3);
-//	printf("ret=%s\n", sub);
-//	free(sub);
+//	printf("str2=%s\n", str2);
+//	joined = ft_strtrim(str1, str2);
+//	printf("ret=%s\n", joined);
+//	//printf("strcmp=%d\n", strcmp(joined, "42"));
+//	free(joined);
 //}
 //
