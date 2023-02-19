@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akisuzuk <akisuzuk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akisuzuk <XXX>                             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 18:40:53 by akisuzuk          #+#    #+#             */
-/*   Updated: 2023/02/18 16:37:41 by akisuzuk         ###   ########.fr       */
+/*   Updated: 2023/02/19 20:18:35 by akisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,10 @@ char	**ft_split(char const *s, char c)
 	}
 	printf("count=%d\n", count);
 	s -= (len + 1);
-	arr = (char **)malloc(sizeof(char *) * (len + 1));
+	printf("len=%d\n", len);
+	arr = malloc(sizeof(char *) * (len + 1));
 	ret = arr;
 	i = 0;
-	printf("CHECK2\n");
 	while (i < count + 1)
 	{
 		printf("LOOP\n");
@@ -71,20 +71,33 @@ char	**ft_split(char const *s, char c)
 		while (s[j] != c)
 			j++;
 		j++;
-		*arr = (char *)malloc(sizeof(char) * j);
-		ft_memcpy(*arr, s, j - 1);
-		*arr[j - 1] = '\0';
+		printf("j=%d\n", j);
+		//*arr = (char *)malloc(sizeof(char) * j);
+		arr[i] = malloc(sizeof(char) * j);
+		printf("CHECK3\n");
+		//ft_memcpy(*arr, s, j - 1);
+		ft_memcpy(arr[i], s, j - 1);
+		printf("arr=%s\n", *arr);
+		printf("CHECK4\n");
+		printf("*arr[i][3]=%c\n", arr[i][3]);
+		// 20230220 ここのヌル文字おくのにセグフォなってしまう。。。
+		//*arr[j - 1] = '\0';
+		// あっできた。この「アスタリスクとインデックスの混在した書き方ダメっぽいね」
+		// しかし別にヌル文字おかなくてもprintfできたのは謎だな。。。
+		arr[i][j-1] = '\0';
+		printf("arr=%s\n", *arr);
 		s += j;
 		arr++;
 		i++;
 	}
-	*arr = '\0';
+	**arr = '\0';
 	return (ret);
 }
 
 int	main(void)
 {
-	char	str1[] = "  tripouille  42  ";
+	//char	str1[] = "  tripouille  42  ";
+	char	str1[] = "tripouille 42";
 	char	str2 = ' ';
 	char	**joined;
 	int		i;
