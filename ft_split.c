@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akisuzuk <akisuzuk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akisuzuk <XXX>                             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 22:00:36 by akisuzuk          #+#    #+#             */
-/*   Updated: 2023/02/21 22:52:39 by akisuzuk         ###   ########.fr       */
+/*   Updated: 2023/02/22 00:26:49 by akisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ char	**ft_split(char const *s, char c)
 		printf("CHECK3\n");
 		//ft_memcpy(*arr, s, j - 1);
 		ft_memcpy(arr[i], s, j - 1);
-		printf("arr=%s\n", *arr);
+		printf("arr=%s\n", arr[i]);
 		printf("CHECK4\n");
 		printf("arr[i][3]=%c\n", arr[i][3]);
 		arr[i][j-1] = '\0';
@@ -92,7 +92,7 @@ char	**ft_split(char const *s, char c)
 int	main(void)
 {
 	//char	str1[] = "  tripouille  42  ";
-	char	str1[] = "tripouille 42 ";
+	char	str1[] = "tripouille 42";
 	char	str2 = ' ';
 	char	**joined;
 	int		i;
@@ -100,6 +100,7 @@ int	main(void)
 	printf("str1=%s\n", str1);
 	printf("str2=%c\n", str2);
 	joined = ft_split(str1, str2);
+	i = 0;
 	while(i < 10)
 	{
 		printf("ret=%s\n", joined[i]);
