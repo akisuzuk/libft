@@ -6,7 +6,7 @@
 /*   By: akisuzuk <akisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 22:00:36 by akisuzuk          #+#    #+#             */
-/*   Updated: 2023/02/21 22:52:39 by akisuzuk         ###   ########.fr       */
+/*   Updated: 2023/02/21 22:00:54 by akisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,20 +79,26 @@ char	**ft_split(char const *s, char c)
 		ft_memcpy(arr[i], s, j - 1);
 		printf("arr=%s\n", *arr);
 		printf("CHECK4\n");
-		printf("arr[i][3]=%c\n", arr[i][3]);
+		printf("*arr[i][3]=%c\n", arr[i][3]);
+		// 20230220 ここのヌル文字おくのにセグフォなってしまう。。。
+		//*arr[j - 1] = '\0';
+		// あっできた。この「アスタリスクとインデックスの混在した書き方ダメっぽいね」
+		// ↑後で調べたら*(arr[j-1])なら*(arr+(j-1))と同値になってOKっぽいです！
+		// しかし別にヌル文字おかなくてもprintfできたのは謎だな。。。
 		arr[i][j-1] = '\0';
 		printf("arr=%s\n", *arr);
 		s += j;
 		arr++;
 		i++;
 	}
+	**arr = '\0';
 	return (ret);
 }
 
 int	main(void)
 {
 	//char	str1[] = "  tripouille  42  ";
-	char	str1[] = "tripouille 42 ";
+	char	str1[] = "tripouille 42";
 	char	str2 = ' ';
 	char	**joined;
 	int		i;
@@ -108,6 +114,3 @@ int	main(void)
 	//printf("strcmp=%d\n", strcmp(joined, "42"));
 	free(joined);
 }
-
-
-//gcc ft_split.c -g -fsanitize=address -fsanitize=undefined
