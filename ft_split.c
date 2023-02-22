@@ -6,7 +6,7 @@
 /*   By: akisuzuk <XXX>                             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 22:00:36 by akisuzuk          #+#    #+#             */
-/*   Updated: 2023/02/22 00:26:49 by akisuzuk         ###   ########.fr       */
+/*   Updated: 2023/02/22 23:44:04 by akisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,15 @@ char	**ft_split(char const *s, char c)
 
 	count = 0;
 	len = 0;
-	while (*s++)
+	while (s[len] != '\0')
 	{
-		if (*s == c)
+		printf("loop\n");
+		if (s[len] != c && (s[len + 1] == c || s[len + 1] == '\0'))
 			count++;
+		s++;
 		len++;
 	}
 	printf("count=%d\n", count);
-	s -= (len + 1);
 	printf("len=%d\n", len);
 	arr = malloc(sizeof(char *) * (len + 1));
 	ret = arr;
@@ -92,7 +93,7 @@ char	**ft_split(char const *s, char c)
 int	main(void)
 {
 	//char	str1[] = "  tripouille  42  ";
-	char	str1[] = "tripouille 42";
+	char	str1[] = "  tripouille 42 tokyo  ";
 	char	str2 = ' ';
 	char	**joined;
 	int		i;

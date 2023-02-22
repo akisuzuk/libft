@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: akisuzuk <akisuzuk@student.42.fr>          +#+  +:+       +#+         #
+#    By: akisuzuk <XXX>                             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/07 23:05:50 by akisuzuk          #+#    #+#              #
-#    Updated: 2023/02/18 14:16:12 by akisuzuk         ###   ########.fr        #
+#    Updated: 2023/02/22 23:09:53 by akisuzuk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,8 @@ SRCS = 	ft_isalpha.c \
 		ft_strdup.c \
 		ft_strjoin.c \
 		ft_substr.c \
-		ft_strtrim.c
+		ft_strtrim.c \
+		ft_split.c
 
 OBJS    = $(SRCS:.c=.o)
 
