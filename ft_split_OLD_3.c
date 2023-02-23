@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
+/*   ft_split_OLD_3.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akisuzuk <akisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 22:00:36 by akisuzuk          #+#    #+#             */
-/*   Updated: 2023/02/23 13:57:17 by akisuzuk         ###   ########.fr       */
+/*   Updated: 2023/02/23 13:56:10 by akisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 	unsigned char		*unchar_dst;
 	const unsigned char	*cons_unchar_src;
 
+	printf("check!\n");
+	printf("src=%c\n", src);
 	if (n != 0)
 	{
 		i = 0;
@@ -92,15 +94,40 @@ char	**ft_split(char const *s, char c)
 		printf("j=%d\n", j);
 		arr[i] = malloc(sizeof(char) * (j - head + 1));
 		printf("j-head=%d\n", j - head);
+		// ↓ここの第二引数s[head]で通らないの謎だな。。。
 		ft_memcpy(arr[i], s + head, j - head + 1);
-		arr[i][j - head + 1] = '\0';
+		arr[i][j- head + 1] = '\0';
 		i++;
 	}
 	return (ret);
+	
+	// このiはlenをリユースした方がいいかも
+//	i = 0;
+//	while (i < count)
+//	{
+//		printf("LOOP\n");
+//		j = 0;
+//		while (s[j] != c)
+//			j++;
+//		j++;
+//		printf("j=%d\n", j);
+//		//*arr = (char *)malloc(sizeof(char) * j);
+//		arr[i] = malloc(sizeof(char) * j);
+//		//ft_memcpy(*arr, s, j - 1);
+//		ft_memcpy(arr[i], s, j - 1);
+//		printf("arr=%s\n", arr[i]);
+//		arr[i][j-1] = '\0';
+//		s += j;
+//		arr++;
+//		i++;
+//	}
+//	return (ret);
+	
 }
 
 int	main(void)
 {
+	//char	str1[] = "  tripouille  42  ";
 	char	str1[] = "  tripouille 42  tokyo ";
 	char	str2 = ' ';
 	char	**joined;
@@ -115,6 +142,7 @@ int	main(void)
 		printf("ret=%s\n", joined[i]);
 		i++;
 	}
+	//printf("strcmp=%d\n", strcmp(joined, "42"));
 	free(joined);
 }
 
