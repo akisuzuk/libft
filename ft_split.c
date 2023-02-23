@@ -6,7 +6,7 @@
 /*   By: akisuzuk <akisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 22:00:36 by akisuzuk          #+#    #+#             */
-/*   Updated: 2023/02/23 13:57:17 by akisuzuk         ###   ########.fr       */
+/*   Updated: 2023/02/23 17:40:13 by akisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
+#include "libft.h"
 
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 char	**ft_split(char const *s, char c);
@@ -41,33 +42,40 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 	return (dst);
 }
 
+char	**free_func(char **ret, size_t size)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < size)
+		free(ret[i]);
+	free(ret);
+	return (NULL);
+}
+
 char	**ft_split(char const *s, char c)
 {
-	int		count;
-	int		len;
-	int		kugiri;
-	char	**arr;
+	size_t		count;
 	char	**ret;
-	int		i;
-	int		j;
-	int		head;
+	size_t		i;
+	size_t		j;
+	size_t		head;
 
 	count = 0;
-	len = 0;
-	kugiri = 0;
-	while (s[len] != '\0')
+	i = 0;
+	while (s[i] != '\0')
 	{
-		if (s[len] != c && (s[len + 1] == c || s[len + 1] == '\0'))
+		if (s[i] != c && (s[i + 1] == c || s[i + 1] == '\0'))
 			count++;
-		if (s[len] == c)
-			kugiri++;
-		len++;
+		i++;
 	}
-	printf("len=%d\n", len);
-	printf("kugiri=%d\n", kugiri);
-	printf("=============\n");
-	arr = malloc(sizeof(char *) * (len - kugiri + 1));
-	ret = arr;
+	//printf("count=%d\n", count);
+	//ret = malloc(sizeof(char *) * (len - kugiri + 1));
+	// 勘違いしてたけど外側のmallocは要素数だけハコ作ればok(マジキチのブログ参照)
+	//ret = malloc(sizeof(char *) * 7);
+	ret = malloc(sizeof(char *) * (count + 1));
+	if (!ret)
+		return (NULL);
 	i = 0;
 	j = 0;
 	while (i < count)
@@ -86,37 +94,74 @@ char	**ft_split(char const *s, char c)
 			}
 			j++;
 		}
-		printf("head=%d\n", head);
-		while (s[j + 1] != c)
+		while (s[j] && s[j] != c)
 			j++;
-		printf("j=%d\n", j);
-		arr[i] = malloc(sizeof(char) * (j - head + 1));
-		printf("j-head=%d\n", j - head);
-		ft_memcpy(arr[i], s + head, j - head + 1);
-		arr[i][j - head + 1] = '\0';
+		ret[i] = malloc(sizeof(char) * (j - head + 1));
+		//if (!ret[i])
+		//	return (free_func(ret, i));
+		ft_memmove(ret[i], s + head, j - head);
+		// ft_memcpy(ret[i], s + head, j - head);
+		ret[i][j - head] = '\0';
 		i++;
+		j++;
 	}
+	ret[i] = NULL;
 	return (ret);
 }
 
-int	main(void)
+size_t	count_words(char const *s, char c)
 {
-	char	str1[] = "  tripouille 42  tokyo ";
-	char	str2 = ' ';
-	char	**joined;
-	int		i;
+	size_t	count;
+	size_t	i;
 
-	printf("str1=%s\n", str1);
-	printf("str2=%c\n", str2);
-	joined = ft_split(str1, str2);
-	i = 0;
-	while(i < 10)
+	count = 0;
+	i= 0;
+	while (s[i])
 	{
-		printf("ret=%s\n", joined[i]);
-		i++;
+		if (s[i] != c)
+		{
+			count++;
+			while (s[i] && s[i] != c)
+				i++;
+		}
+		else
+			i++;
 	}
-	free(joined);
+	return (count);
 }
 
+
+// #include <string.h>
+// int	main(void)
+// {
+// 	char	*splitme;
+// 	char	**tab;
+// 	int		i;
+// 
+// 	splitme = strdup("--1-2--3---4----5-----42");
+// 	tab = ft_split(splitme, '-');
+// 	i = 0;
+// 	while (tab[i])
+// 		printf("ret=%s\n", tab[i++]);
+// 
+// //	char	str1[] = "--1-2--3---4----5-----42";
+// //	char	str2 = '-';
+// 	//char	str1[] = " abc  def ghi  ";
+// 	//char	str2 = ' ';
+// 
+// //	char	**joined;
+// //	int		i;
+// //
+// //	printf("str1=%s\n", str1);
+// //	printf("str2=%c\n", str2);
+// //	joined = ft_split(str1, str2);
+// //	i = 0;
+// //	while(joined[i])
+// //	{
+// //		printf("ret=%s\n", joined[i]);
+// //		i++;
+// //	}
+// //	free(joined);
+// }
 
 //gcc ft_split.c -g -fsanitize=address -fsanitize=undefined
