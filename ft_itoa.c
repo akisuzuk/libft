@@ -6,136 +6,116 @@
 /*   By: akisuzuk <XXX>                             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 08:38:35 by akisuzuk          #+#    #+#             */
-/*   Updated: 2023/02/23 20:33:33 by akisuzuk         ###   ########.fr       */
+/*   Updated: 2023/02/24 23:51:56 by akisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+char	*ifplus(int n);
+char	*ifminus(int n);
+char	*ifzero(char *ret);
+char	*store_max(char *ret);
 char	*ft_itoa(int n);
 
-char	*ft_itoa(int n)
-//int	ft_atoi(const char *str)
+char	*ifplus(int n)
 {
-	char	*ret;
-	int		i;
-	char	flag;
 	int		digit;
 	int		temp;
+	char	*ret;
 
-	flag = 'X';
-	if (n == -2147483648)
+	digit = 0;
+	temp = n;
+	while (temp != 0)
 	{
-		//write(1, "-2147483648", 11);
-		ret = malloc(sizeof(char) * 12);
+		temp /= 10;
+		digit++;
 	}
-	else if (n == 0)
+	ret = malloc(sizeof(char) * (digit + 1));
+	ret[digit] = '\0';
+	while (n != 0)
 	{
-		ret = malloc(sizeof(char) * 2);
-		ret[0] = '0';
-		ret[1] = '\0';
+		ret[digit - 1] = n % 10 + '0';
+		n /= 10;
+		digit--;
 	}
-	else
-	{
-		printf("HIT!\n");
-		i = 0;
-		if (n < 0)
-		{
-			flag = '-';
-			n *= -1;
-		}
-		digit = 0;
-		temp = n;
-		while (temp != 0)
-		{
-			temp /= 10;
-			digit++;
-		}
-		printf("digit=%d\n", digit);
-		if (flag == '-')
-		{
-			ret = malloc(sizeof(char) * (digit + 2));
-			ret[0] = '-';
-			ret[digit + 1] = '\0';
-			while (n != 0)
-			{
-				ret[digit] = n % 10 + '0';
-				n /= 10;
-				digit--;
-			}
-			return (ret);
-		}
-		else
-		{
-			ret = malloc(sizeof(char) * (digit + 1));
-			ret[digit] = '\0';
-			while (n != 0)
-			{
-				ret[digit - 1] = n % 10 + '0';
-				n /= 10;
-				digit--;
-			}
-			return (ret);
-		}
-	}
+	return (ret);
 }
 
-//int	main(int argc, char *argv[])
-int	main(void)
+char	*ifminus(int n)
 {
-	char *result;
-	//char escape[] = {9, 10, 11, 12, 13, 0};
-	//char escape[] = {9, 10, 11, 12, 13, 0};
+	int		digit;
+	int		temp;
+	char	*ret;
 
-	//argc = 1;
-	//printf("str=%s\n", argv[1]);
-	//printf("str=%s\n", escape);
-	//printf("ft_atoi = %d\n", ft_atoi(escape));
-	result = ft_itoa(-12345);
-	printf("ft_itoa = %s\n", result);
-	free(result);
+	n *= -1;
+	digit = 0;
+	temp = n;
+	while (temp != 0)
+	{
+		temp /= 10;
+		digit++;
+	}
+	ret = malloc(sizeof(char) * (digit + 2));
+	ret[0] = '-';
+	ret[digit + 1] = '\0';
+	while (n != 0)
+	{
+		ret[digit] = n % 10 + '0';
+		n /= 10;
+		digit--;
+	}
+	return (ret);
+}
+
+char	*ifzero(char *ret)
+{
+	ret[0] = '0';
+	ret[1] = '\0';
+	return (ret);
+}
+
+char	*store_max(char *ret)
+{
+	ret[0] = '-';
+	ret[1] = '2';
+	ret[2] = '1';
+	ret[3] = '4';
+	ret[4] = '7';
+	ret[5] = '4';
+	ret[6] = '8';
+	ret[7] = '3';
+	ret[8] = '6';
+	ret[9] = '4';
+	ret[10] = '8';
+	ret[11] = '\0';
+	return (ret);
+}
+
+char	*ft_itoa(int n)
+{
+	if (n == -2147483648)
+		return (store_max(malloc(sizeof(char) * 12)));
+	else if (n == 0)
+		return (ifzero(malloc(sizeof(char) * 2)));
+	else
+	{
+		if (n < 0)
+			return (ifminus(n));
+		else
+			return (ifplus(n));
+	}
 	return (0);
 }
 
-//ret = ret*10 + str[i] - '0';
-
-
-
-//void	output(int num[], int i)
+//int	main(void)
 //{
-//	char	opc;
+//	char *result;
 //
-//	while (i > 0)
-//	{
-//		opc = num[i - 1] + '0';
-//		write(1, &opc, 1);
-//		i--;
-//	}
+//	//result = ft_itoa(-12345);
+//	result = ft_itoa(-123);
+//	printf("ft_itoa = %s\n", result);
+//	free(result);
+//	return (0);
 //}
 //
-//void	ft_putnbr(int nb)
-//{
-//	int	num[12];
-//	int	i;
-//
-//	if (nb == -2147483648)
-//		write(1, "-2147483648", 11);
-//	else if (nb == 0)
-//		write(1, "0", 1);
-//	else
-//	{
-//		if (nb < 0)
-//		{
-//			write(1, "-", 1);
-//			nb *= -1;
-//		}
-//		i = 0;
-//		while (nb != 0)
-//		{
-//			num[i] = nb % 10;
-//			nb /= 10;
-//			i++;
-//		}
-//		output(num, i);
-//	}
-//}
