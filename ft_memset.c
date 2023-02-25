@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akisuzuk <akisuzuk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akisuzuk <XXX>                             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 17:15:47 by akisuzuk          #+#    #+#             */
-/*   Updated: 2023/01/29 16:23:14 by akisuzuk         ###   ########.fr       */
+/*   Updated: 2023/02/25 21:48:49 by akisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,28 +24,24 @@ void	*ft_memset(void *b, int c, size_t len);
 
 void	*ft_memset(void *b, int c, size_t len)
 {
-	int				i;
-	int				int_len;
-	unsigned char	unchar_c;
-	unsigned char	*unchar_b;
+	size_t			i;
+	unsigned char	*ret;
 
+	ret = (unsigned char *)b;
 	i = 0;
-	unchar_b = (unsigned char *)b;
-	unchar_c = (unsigned char)c;
-	int_len = (int)len;
-	while (i < int_len)
+	while (i < len)
 	{
-		*unchar_b++ = unchar_c;
+		*ret++ = (unsigned char) c;
 		i++;
 	}
-	return (unchar_b);
+	return (ret - i);
 }
 
 //int	main(void)
 //{
 //	char	str1[256];
-////	char	str2[256];
 //	int		n;
+//	char	*result;
 //
 //	str1[0] = 'a';
 //	str1[1] = 'b';
@@ -53,20 +49,15 @@ void	*ft_memset(void *b, int c, size_t len)
 //	str1[3] = 'd';
 //	str1[4] = 'e';
 //	str1[5] = '\0';
-////	str2[0] = 'A';
-////	str2[1] = 'B';
-////	str2[2] = 'C';
-////	str2[3] = '\0';
-//	n = 0;
+//
 //	printf("str1=%s\n", str1);
 ////	printf("%s\n", str2);
 //	// memetは配列要素を0アウトして初期化するのに有効らしい。なので
 //	// なので普通は第３引数を第一引数にする
 //	// まあ確かに普通に使うだけならstrncpyとかと変わらんなとは思ってた
 //	// ていうか、だから第一引数がcharなのに挿入される第二引数が0なんだね
-//	ft_memset(str1+1, 1, 2);
-//	printf("str1=%s\n", str1);
-////	printf("%s\n", str2);
+//	result = ft_memset(str1, 1, 2);
+//	printf("str1=%s\n", result);
 //	printf("------------\n");
 //	return (0);
 //}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akisuzuk <akisuzuk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akisuzuk <XXX>                             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 11:30:57 by akisuzuk          #+#    #+#             */
-/*   Updated: 2023/01/29 15:04:32 by akisuzuk         ###   ########.fr       */
+/*   Updated: 2023/02/25 22:03:04 by akisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char	*ft_strrchr(const char *s, int c)
 	{
 		last = s;
 		flag = 1;
-	}	
+	}
 	if (flag == 1)
 		return ((char *)last);
 	else
