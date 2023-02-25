@@ -3,24 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akisuzuk <akisuzuk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akisuzuk <XXX>                             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 12:25:57 by akisuzuk          #+#    #+#             */
-/*   Updated: 2023/01/15 13:07:59 by akisuzuk         ###   ########.fr       */
+/*   Updated: 2023/02/25 20:25:20 by akisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <string.h>
 
-int	ft_strlen(char *str);
+size_t	ft_strlen(const char *s);
 
-int	ft_strlen(char *str)
+size_t	ft_strlen(const char *s)
+//int	ft_strlen(char *str)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
-	while (str[i] != '\0')
+	while (s[i] != '\0')
 	{
 		i++;
 	}

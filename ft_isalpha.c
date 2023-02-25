@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akisuzuk <akisuzuk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akisuzuk <XXX>                             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 09:38:33 by akisuzuk          #+#    #+#             */
-/*   Updated: 2023/01/14 14:06:53 by akisuzuk         ###   ########.fr       */
+/*   Updated: 2023/02/25 20:40:28 by akisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // 判定自体は文字コードが範囲に収まってるかで判定すればok
 // 文字列じゃなくて文字か。CPC02-ex02は文字列なのでその要素にはなるか
 // あとman読んだら
-//"The isalpha() function returns zero 
+//"The isalpha() function returns zero
 // if the character tests false
 // and returns non-zero if the character tests true."
 // とあったけど、non-zeroは1でtrue/falseが1/0に対応してるってことね
@@ -22,14 +22,14 @@
 #include<unistd.h>
 #include<ctype.h>
 
-int	ft_isalpha(char moji);
+int	ft_isalpha(int c);
 
-int	ft_isalpha(char moji)
+int	ft_isalpha(int c)
 {
-	if ((moji < 'a' || moji > 'z') && (moji < 'A' || moji > 'Z'))
-		return (0);
-	else
+	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
 		return (1);
+	else
+		return (0);
 }
 
 /*

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akisuzuk <akisuzuk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akisuzuk <XXX>                             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 17:45:51 by akisuzuk          #+#    #+#             */
-/*   Updated: 2023/01/15 12:16:46 by akisuzuk         ###   ########.fr       */
+/*   Updated: 2023/02/25 21:27:40 by akisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,12 @@
 #include<unistd.h>
 #include<ctype.h>
 
-int	ft_isprint(char moji);
+int	ft_isprint(int c);
 
-int	ft_isprint(char moji)
+int	ft_isprint(int c)
+//int	ft_isprint(char moji)
 {
-	if (moji - 0 < 32 || moji - 0 > 126)
+	if (c - 0 < 32 || c - 0 > 126)
 		return (0);
 	else
 		return (1);
