@@ -6,7 +6,7 @@
 /*   By: akisuzuk <akisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 22:00:36 by akisuzuk          #+#    #+#             */
-/*   Updated: 2023/02/25 11:35:55 by akisuzuk         ###   ########.fr       */
+/*   Updated: 2023/02/25 11:30:49 by akisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,19 @@
 #include <math.h>
 #include "libft.h"
 
+char	**free_func(char **ret, size_t size);
 char	**ft_split(char const *s, char c);
+
+char	**free_func(char **ret, size_t size)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < size)
+		free(ret[i]);
+	free(ret);
+	return (NULL);
+}
 
 char	**ft_split(char const *s, char c)
 {
@@ -39,6 +51,7 @@ char	**ft_split(char const *s, char c)
 		return (NULL);
 	i = 0;
 	j = 0;
+	//---ここから分離---
 	while (i < count)
 	{
 		while (s[j] != '\0')
@@ -67,27 +80,27 @@ char	**ft_split(char const *s, char c)
 	return (ret);
 }
 
-//int	main(void)
-//{
-//	//char	str1[] = "  tripouille  42  ";
-//	char	str1[] = "  tripouille 42  tokyo ";
-//	char	str2 = ' ';
-//	char	**joined;
-//	int		i;
-//
-//	printf("str1=%s\n", str1);
-//	printf("str2=%c\n", str2);
-//	joined = ft_split(str1, str2);
-//	i = 0;
-//	while (i < 10)
-//	{
-//		printf("ret=%s\n", joined[i]);
-//		i++;
-//	}
-//	//printf("strcmp=%d\n", strcmp(joined, "42"));
-//	free(joined);
-//	return (0);
-//}
+int	main(void)
+{
+	//char	str1[] = "  tripouille  42  ";
+	char	str1[] = "  tripouille 42  tokyo ";
+	char	str2 = ' ';
+	char	**joined;
+	int		i;
+
+	printf("str1=%s\n", str1);
+	printf("str2=%c\n", str2);
+	joined = ft_split(str1, str2);
+	i = 0;
+	while (i < 10)
+	{
+		printf("ret=%s\n", joined[i]);
+		i++;
+	}
+	//printf("strcmp=%d\n", strcmp(joined, "42"));
+	free(joined);
+	return (0);
+}
 
 //int	main(void)
 //{
