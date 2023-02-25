@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akisuzuk <akisuzuk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akisuzuk <XXX>                             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 22:00:36 by akisuzuk          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/02/23 17:44:58 by akisuzuk         ###   ########.fr       */
+=======
+/*   Updated: 2023/02/25 00:11:28 by akisuzuk         ###   ########.fr       */
+>>>>>>> f897e6f5bc3f686f89217859aea9a74c4b9a7df5
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,31 +20,8 @@
 #include <math.h>
 #include "libft.h"
 
-void	*ft_memcpy(void *dst, const void *src, size_t n);
+char	**free_func(char **ret, size_t size);
 char	**ft_split(char const *s, char c);
-
-void	*ft_memcpy(void *dst, const void *src, size_t n)
-{
-	int					i;
-	int					int_n;
-	unsigned char		*unchar_dst;
-	const unsigned char	*cons_unchar_src;
-
-	if (n != 0)
-	{
-		i = 0;
-		unchar_dst = (unsigned char *)dst;
-		cons_unchar_src = (const unsigned char *)src;
-		int_n = (int)n;
-		while (i < int_n)
-		{
-			*unchar_dst++ = *cons_unchar_src++;
-			i++;
-		}
-		return (dst);
-	}
-	return (dst);
-}
 
 char	**free_func(char **ret, size_t size)
 {
@@ -74,6 +55,9 @@ char	**ft_split(char const *s, char c)
 		return (NULL);
 	i = 0;
 	j = 0;
+
+	// -----ここから関数分離-----
+
 	while (i < count)
 	{
 		while (s[j] != '\0')
@@ -93,8 +77,11 @@ char	**ft_split(char const *s, char c)
 		while (s[j] && s[j] != c)
 			j++;
 		ret[i] = malloc(sizeof(char) * (j - head + 1));
+<<<<<<< HEAD
 		if (!ret[i])
 			return (free_func(ret, i));
+=======
+>>>>>>> f897e6f5bc3f686f89217859aea9a74c4b9a7df5
 		ft_memmove(ret[i], s + head, j - head);
 		ret[i][j - head] = '\0';
 		i++;
@@ -110,18 +97,18 @@ char	**ft_split(char const *s, char c)
 // 	char	*splitme;
 // 	char	**tab;
 // 	int		i;
-// 
+//
 // 	splitme = strdup("--1-2--3---4----5-----42");
 // 	tab = ft_split(splitme, '-');
 // 	i = 0;
 // 	while (tab[i])
 // 		printf("ret=%s\n", tab[i++]);
-// 
+//
 // //	char	str1[] = "--1-2--3---4----5-----42";
 // //	char	str2 = '-';
 // 	//char	str1[] = " abc  def ghi  ";
 // 	//char	str2 = ' ';
-// 
+//
 // //	char	**joined;
 // //	int		i;
 // //
