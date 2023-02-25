@@ -6,7 +6,7 @@
 /*   By: akisuzuk <akisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 22:00:36 by akisuzuk          #+#    #+#             */
-/*   Updated: 2023/02/25 11:35:55 by akisuzuk         ###   ########.fr       */
+/*   Updated: 2023/02/25 13:23:09 by akisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,42 @@
 #include <math.h>
 #include "libft.h"
 
+char	**store_arr(char const *s, char c, char **ret, size_t count);
 char	**ft_split(char const *s, char c);
+
+char	**store_arr(char const *s, char c, char **ret, size_t count)
+{
+	size_t	i;
+	size_t	j;
+	size_t	head;
+
+	i = 0;
+	j = 0;
+	while (i < count)
+	{
+		while (s[j] != '\0')
+		{
+			if ((j == 0 && s[j] != c) || (j > 0 && s[j] != c && s[j - 1] == c))
+			{
+				head = j;
+				break ;
+			}
+			j++;
+		}
+		while (s[j] && s[j] != c)
+			j++;
+		ret[i] = malloc(sizeof(char) * (j - head + 1));
+		ft_memmove(ret[i], s + head, j - head);
+		ret[i++][(j++) - head] = '\0';
+	}
+	return (ret);
+}
 
 char	**ft_split(char const *s, char c)
 {
 	size_t		count;
 	char		**ret;
 	size_t		i;
-	size_t		j;
-	size_t		head;
 
 	count = 0;
 	i = 0;
@@ -37,33 +64,8 @@ char	**ft_split(char const *s, char c)
 	ret = malloc(sizeof(char *) * (count + 1));
 	if (!ret)
 		return (NULL);
-	i = 0;
-	j = 0;
-	while (i < count)
-	{
-		while (s[j] != '\0')
-		{
-			if (j == 0 && s[j] != c)
-			{
-				head = j;
-				break ;
-			}
-			if (j > 0 && s[j] != c && s[j - 1] == c)
-			{
-				head = j;
-				break ;
-			}
-			j++;
-		}
-		while (s[j] && s[j] != c)
-			j++;
-		ret[i] = malloc(sizeof(char) * (j - head + 1));
-		ft_memmove(ret[i], s + head, j - head);
-		ret[i][j - head] = '\0';
-		i++;
-		j++;
-	}
-	ret[i] = NULL;
+	store_arr(s, c, ret, count);
+	ret[count] = NULL;
 	return (ret);
 }
 
