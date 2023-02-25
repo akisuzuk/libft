@@ -6,7 +6,7 @@
 #    By: akisuzuk <akisuzuk@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/07 23:05:50 by akisuzuk          #+#    #+#              #
-#    Updated: 2023/02/25 14:39:46 by akisuzuk         ###   ########.fr        #
+#    Updated: 2023/02/25 17:05:21 by akisuzuk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,11 @@ SRCS = 	ft_isalpha.c \
 		ft_strtrim.c \
 		ft_split.c \
 		ft_itoa.c \
-		ft_strmapi.c
+		ft_strmapi.c \
+		ft_striteri.c \
+		ft_putchar_fd.c \
+		ft_putstr_fd.c \
+		ft_putendl_fd.c
 
 OBJS    = $(SRCS:.c=.o)
 
