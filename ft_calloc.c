@@ -6,7 +6,7 @@
 /*   By: akisuzuk <akisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 16:38:00 by akisuzuk          #+#    #+#             */
-/*   Updated: 2023/02/04 17:51:23 by akisuzuk         ###   ########.fr       */
+/*   Updated: 2023/02/26 14:28:16 by akisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <limits.h>
+#include <stdint.h>
+#include "libft.h"
 
 void	*ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t count, size_t size);
@@ -43,9 +46,12 @@ void	*ft_calloc(size_t count, size_t size)
 {
 	void	*p;
 
-	if (count > SIZE_MAX / size)
+	//if (count > (size_t)SIZE_MAX / size)
+	if (size != 0 && count > (size_t)SIZE_MAX / size)
 		return (NULL);
-	p = (void *)malloc(count * size);
+	p = malloc(count * size);
+	if (!p)
+		return (NULL);
 	ft_bzero(p, count * size);
 	return (p);
 }
@@ -55,7 +61,7 @@ void	*ft_calloc(size_t count, size_t size)
 //	char	*ch;
 //	char	*ft_ch;
 //
-//	ft_ch = (char *)ft_calloc(SIZE_MAX, SIZE_MAX);
+//	ft_ch = (char *)ft_calloc(SIZE_MAX, 0);
 //	ch = (char *)calloc(1, 100);
 //	free(ft_ch);
 //	free(ch);
