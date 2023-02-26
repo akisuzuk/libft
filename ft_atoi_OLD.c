@@ -6,7 +6,7 @@
 /*   By: akisuzuk <akisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 08:38:35 by akisuzuk          #+#    #+#             */
-/*   Updated: 2023/02/26 16:05:24 by akisuzuk         ###   ########.fr       */
+/*   Updated: 2023/02/26 15:40:25 by akisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ int	ft_atoi(const char *str);
 
 int	ft_atoi(const char *str)
 {
-	long	nega;
-	long	ret;
+	int	nega;
+	int	ret;
 
 	ret = 0;
 	nega = 1;
@@ -37,17 +37,14 @@ int	ft_atoi(const char *str)
 		return (0);
 	else
 	{
-		while (*str >= '0' && *str <= '9')
+		//while (*str >= '0' && *str <= '9')
+		while(*str != '\0')
 		{
-			if (ret > LONG_MAX / 10)
-				return ((int)LONG_MAX);
-			if (ret == LONG_MAX / 10 && *str - '0' > LONG_MAX % 10)
-				return ((int)LONG_MAX);
 			ret = ret * 10 + (*str - '0');
 			str++;
 		}
 	}
-	return ((int)ret * nega);
+	return (ret * nega);
 }
 
 //int	main(void)
@@ -99,3 +96,46 @@ int	ft_atoi(const char *str)
 //		res = res * 10 + str[i] - '0';
 //	}
 //	return (sign * res);
+
+#include <stdio.h>
+
+int main(void)
+{
+	printf("%d\n", atoi("-9223372036854775803"));
+	printf("%d\n", atoi("-9223372036854775804"));
+	printf("%d\n", atoi("-9223372036854775805"));
+	printf("%d\n", atoi("-9223372036854775806"));
+	printf("%d\n", atoi("-9223372036854775807"));
+	printf("INT_MIN%d\n", atoi("-9223372036854775808"));
+	printf("%d\n", atoi("-9223372036854775809"));
+	printf("%d\n", atoi("-9223372036854775810"));
+	printf("%d\n", atoi("-9223372036854775811"));
+	return (0);
+}
+
+
+
+while ()
+{
+	if (ret > LONG_MAX / 10 || )
+		return ((int)LONG_MAX)
+	ret = ret * 10 + % 10
+}
+
+
+long max = 12345
+1.  
+2345 > 12345 / 10
+return (LONG_MAX)
+
+2.  
+1234 == 12345 / 10 && str[i] - '0' >  12345 % 10
+return (LONG_MAX)
+
+
+ret 2345 * 10 
+ret 1234
+
+
+
+strtol
