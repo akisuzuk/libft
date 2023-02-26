@@ -6,17 +6,15 @@
 /*   By: akisuzuk <akisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 21:00:11 by akisuzuk          #+#    #+#             */
-/*   Updated: 2023/01/29 15:10:26 by akisuzuk         ###   ########.fr       */
+/*   Updated: 2023/02/26 11:20:26 by akisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <string.h>
+#include "libft.h"
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n);
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
-//int	ft_strncmp(char *s1, char *s2, unsigned int n)
 {
 	unsigned int	i;
 
@@ -31,31 +29,24 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 			return (0);
 		i++;
 	}
-	return (s1[i] - s2[i]);
+	// -256とかでぶっ飛んで一周してる場合を考慮して絶対値で比較
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }
 
-/*
-int	main(void)
-{
-	char			str1[4];
-	char			str2[5];
-	unsigned int	n;
 
-	str1[0] = 'a';
-	str1[1] = 'b';
-	str1[2] = 'c';
-	str1[3] = '\0';
-	str2[0] = 'a';
-	str2[1] = 'b';
-	str2[2] = 'c';
-	str2[3] = 'd';
-	str2[4] = '\0';
-	n = 4;
-	printf("%s\n", str1);
-	printf("%s\n", str2);
-	printf("ret = %d\n", ft_strncmp(str1, str2, n));
-	printf("-------------\n");
-	printf("ret = %d\n", strncmp(str1, str2, n));
-	return (0);
-}
-*/
+//int	main(void)
+//{
+//	
+//	char *str = "libft-test-tokyo";
+//	char *cmp = "libft";
+//	size_t	n;
+//
+//	cmp[5] = -42;
+//	n = 20;
+//	printf("str=%s\n", str);
+//	printf("cmp=%s\n", cmp);
+//	//printf("ft = %d\n", ft_strncmp(str, cmp, n));
+//	printf("-------------\n");
+//	printf("origin = %d\n", strncmp(str, cmp, n));
+//	return (0);
+//}
